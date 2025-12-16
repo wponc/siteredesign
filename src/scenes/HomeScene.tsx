@@ -3,7 +3,7 @@ import PersonalScene from "../scenes/PersonalScene"
 import { useState, useEffect, useRef } from "react"
 
 export default function HomeScene() {
-  const fontPath = './public/Roboto_Regular.json'
+  const fontPath = './Roboto_Regular.json'
   return(
     <>
     {/* <ambientLight intensity={Math.PI} /> */}
