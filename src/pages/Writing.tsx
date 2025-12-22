@@ -1,5 +1,7 @@
 import WritingScene from "../scenes/WritingScene"
 import { Canvas } from "@react-three/fiber"
+import { EffectComposer, Pixelation } from "@react-three/postprocessing";
+
 
 export default function Writing() {
   return (
@@ -10,7 +12,6 @@ export default function Writing() {
       >
       <WritingScene />
     </Canvas>
-
     <section>
       <h1>Writing</h1>
       <p>Writing content goes here.</p>

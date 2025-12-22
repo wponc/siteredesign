@@ -1,15 +1,15 @@
 import { useRef, useMemo, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
 import * as THREE from "three"
-import { useGLTF, OrbitControls } from "@react-three/drei"
+import { useGLTF, OrbitControls, Environment } from "@react-three/drei"
 
 const PARTICLE_COUNT = 10000
 const STREAM_WIDTH = 20
-const STREAM_HEIGHT = 1
+const STREAM_HEIGHT = 0.5
 const STREAM_DEPTH = 10
 const PARTICLE_SIZE = 0.01
 
-const FLOW_SPEED = 0.0001
+const FLOW_SPEED = 0.0005
 const DISPLACEMENT_RADIUS = 1.5
 const DISPLACEMENT_FORCE = 0.25
 
@@ -27,7 +27,7 @@ function ParticleStream() {
       if ((obj as THREE.Mesh).isMesh) {
         const mesh = obj as THREE.Mesh
         mesh.geometry.computeVertexNormals()
-        mesh.material = new THREE.MeshNormalMaterial()
+        mesh.material = new THREE.MeshPhysicalMaterial()
         mesh.castShadow = true
         mesh.receiveShadow = true
       }
@@ -182,8 +182,9 @@ export default function WritingScene() {
   return (
     <> 
       <color attach="background" args={["#000000"]} />
-      <ambientLight intensity={1} />
-      <pointLight position={[10, 10, 10]} intensity={3} />
+      <Environment preset="studio" />
+      {/* <ambientLight intensity={1} /> */}
+      {/* <pointLight position={[10, 10, 10]} intensity={3} /> */}
 
       <ParticleStream />
 
