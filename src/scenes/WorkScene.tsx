@@ -69,7 +69,7 @@ export default function PersonalScene() {
         planeArgs={[3, 7]}
         modelPath=""
       >
-        <Gltf src="ICESat2.glb" scale={0.3} rotation={[Math.PI / 4, Math.PI / 4, 0]}/>
+        {/* <Gltf src="ICESat2.glb" scale={0.3} rotation={[Math.PI / 4, Math.PI / 4, 0]}/> */}
         <Environment preset="dawn" />
         <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
       </Card>
@@ -79,7 +79,7 @@ export default function PersonalScene() {
         meshPosition={[2, 2, -1]}
         planeArgs={[3, 3]}
       >
-        <Gltf src="tree.glb" position={[0, -1, 0]} scale={0.15} />
+        {/* <Gltf src="tree.glb" position={[0, -1, 0]} scale={0.15} /> */}
         <Environment preset="park" />
       </Card>
       <Card

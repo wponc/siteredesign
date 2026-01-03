@@ -1,35 +1,86 @@
-import { OrbitControls, Environment, useGLTF, Cloud, useAnimations, Text } from "@react-three/drei"
+import { OrbitControls, Environment, useGLTF, MeshTransmissionMaterial, Lightformer } from "@react-three/drei"
 import { useRef, useEffect } from "react"
+import { useFrame } from "@react-three/fiber"
+import { Group, MeshPhysicalMaterial } from "three"
+import { useControls } from 'leva'
+
+function Model(props) {
+  const { nodes, materials } = useGLTF('/separatedProfileSmoothed.glb')
+  return (
+    <group {...props} dispose={null} >
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.face.geometry}>
+        <MeshTransmissionMaterial
+          samples={8}
+          resolution={16}
+          transmission={1}
+          roughness={0.2}
+          thickness={0.8}
+          chromaticAberration={0.7}
+          color={'#ffffff'}
+          attenuationColor={'#ffffff'}
+        />
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.hair.geometry}
+      >
+      <meshPhysicalMaterial
+        color="darkgray"
+        metalness={0.9}
+        roughness={0.2}
+      />
+      </mesh>
+    </group>
+  )
+}
+
+useGLTF.preload('/separatedProfileSmoothed.glb')
 
 export default function PersonalScene() {
+  const lightGroup = useRef<Group | null>(null);
+  const l1 = useRef(null);
+  
+  // const lightformer1Position = useControls({'Lightformer1': [-.2, .5, -.1]})
+  // const lightformer2Position = useControls({'Lightformer2': [0, 0, -.2]})
+  // const lightformer3Position = useControls({'Lightformer3': [0, 2, 0]})
+  useFrame((state) => {
+    if (l1.current) {
+      l1.current.position.x = Math.sin(state.clock.elapsedTime * 0.5) * .5
+    }
+  })
+
   return (
     <>
       <OrbitControls />
-      {/* <Environment preset="studio"/> */}
-      {/* <ambientLight /> */}
-      {/* <Cloud segments={40} bounds={[10, 2, 2]} volume={10} color="orange" position={[0, 0, 4]}/>  */}
-      {/* <Cloud seed={1} scale={2} volume={5} color="hotpink" fade={100} /> */}
-      {/* Neon-glowing text elements in billboard fashion */}
-      <Text
-        position={[-1, 0, 5]}
-        fontSize={0.5}
-        color="cyan"
-        emissive="cyan"
-        emissiveIntensity={4}
-        billboard
-      >
-        NEON TEXT 1
-      </Text>
-      <Text
-        position={[2, 0, 4]}
-        fontSize={0.4}
-        color="magenta"
-        emissive="magenta"
-        emissiveIntensity={3}
-        billboard
-      >
-        NEON TEXT 2
-      </Text>
+      <ambientLight intensity={0.3}/>
+      <group >
+        <Model rotation={[0, -Math.PI * .9, .2]} />
+        <Environment frames={1} resolution={256}>
+          <Lightformer 
+            color="#fff6f6" 
+            position={[0, 0.5, 1]} 
+            form={'ring'} 
+            ref={l1}
+            intensity={5} 
+          />
+          {/* <Lightformer  
+            color="#f6f8ff" 
+            position={lightformer2Position.Lightformer2} 
+            form={'rect'} 
+            intensity={3} 
+          /> */}
+          {/* <Lightformer 
+            color="#f6fff9" 
+            position={lightformer3Position.Lightformer3} 
+            form={'ring'} 
+            intensity={10} 
+          /> */}
+        </Environment>
+      </group>
     </>
   );
 }

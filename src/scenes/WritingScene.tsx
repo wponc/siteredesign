@@ -1,146 +1,163 @@
-import { useRef, useMemo, useEffect } from "react"
+import { useRef, forwardRef, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
+import { useGLTF, Environment, MeshTransmissionMaterial } from "@react-three/drei"
 import * as THREE from "three"
-import { Environment, useGLTF } from "@react-three/drei"
 import { easing } from "maath"
+import { EffectComposer, Bloom, DepthOfField, ToneMapping } from '@react-three/postprocessing'
 
-const PARTICLE_COUNT = 50000
-const STREAM_WIDTH = 20
-const STREAM_HEIGHT = 0.6
-const STREAM_DEPTH = 10
-const PARTICLE_SIZE = 0.015
 
-const FLOW_SPEED = 0.001
-const DISPLACEMENT_RADIUS = 0.8
-const DISPLACEMENT_FORCE = 0.1
+const PEN_TIP_LOCAL = new THREE.Vector3(0, -0.1, 0)
 
-export default function ParticleStream() {
+const Pen = forwardRef<THREE.Object3D>((_, ref) => {
+  const { scene } = useGLTF("/penCompressed.glb")
 
-  const particlesRef = useRef<THREE.Points>(null!)
-  const boxRef = useRef(null!)
+  return (
+    <group ref={ref}>
+      {scene.children.map((child, i) => {
+        if (!(child instanceof THREE.Mesh)) return null
 
-  const { positions, velocities } = useMemo(() => {
-    const positions = new Float32Array(PARTICLE_COUNT * 3)
-    const velocities = new Float32Array(PARTICLE_COUNT * 3)
+        return (
+          <mesh
+            key={i}
+            geometry={child.geometry}
+            position={child.position.toArray()}
+            rotation={child.rotation.toArray()}
+            scale={child.scale.toArray()}
+            castShadow
+            receiveShadow
+          >
+            <MeshTransmissionMaterial
+              backside
+              samples={8}
+              resolution={32}
+              transmission={1}
+              roughness={0.4}
+              thickness={0.9}
+              chromaticAberration={0.9}
+              color={'#ffffff'}
+              attenuationColor={'#ffffff'}
+            />
+          </mesh>
+        )
+      })}
+    </group>
+  )
+})
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3
+useGLTF.preload('/penCompressed.glb')
+function DrawLine({ getPoint }: { getPoint: () => THREE.Vector3 | null }) {
+  const lineRef = useRef<THREE.Line>(null!)
+  const points = useRef<{ point: THREE.Vector3; time: number }[]>([])
+  const colors = useRef<THREE.Vector4[]>([])
 
-      positions[i3]     = (Math.random() - 0.5) * STREAM_WIDTH
-      positions[i3 + 1] = (Math.random() - 0.5) * STREAM_HEIGHT
-      positions[i3 + 2] = (Math.random() - 0.5) * STREAM_DEPTH
-
-      velocities[i3]     = FLOW_SPEED
-      velocities[i3 + 1] = 0
-      velocities[i3 + 2] = 0
+  const vertexShader = `
+    attribute vec4 color;
+    varying vec4 vColor;
+    void main() {
+      vColor = color;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
+  `
 
-    return { positions, velocities }
-  }, [])
+  const fragmentShader = `
+    varying vec4 vColor;
+    void main() {
+      gl_FragColor = vColor;
+    }
+  `
+
+  useFrame((state) => {
+    const p = getPoint()
+    if (!p || !lineRef.current) return
+
+    const last = points.current.at(-1)
+
+    // Distance threshold prevents oversampling
+    if (!last || last.point.distanceToSquared(p) > 0.0005) {
+      const currentTime = state.clock.elapsedTime
+      points.current.push({ point: p.clone(), time: currentTime })
+      colors.current.push(new THREE.Vector4(1, 1, 1, 1)) // start white with full alpha
+
+      // Remove old points (older than 3 seconds)
+      const lifetime = 3
+      const filtered = points.current.filter(item => currentTime - item.time < lifetime)
+      points.current.length = 0
+      points.current.push(...filtered)
+
+      // Update colors based on age
+      colors.current.length = 0
+      for (const item of points.current) {
+        const age = currentTime - item.time
+        const alpha = Math.max(0, 1 - age / lifetime)
+        colors.current.push(new THREE.Vector4(1, 1, 1, alpha))
+      }
+
+      const oldGeom = lineRef.current.geometry
+      oldGeom.dispose()
+
+      const newGeom = new THREE.BufferGeometry().setFromPoints(points.current.map(p => p.point))
+      newGeom.setAttribute('color', new THREE.Float32BufferAttribute(colors.current.flatMap(c => [c.x, c.y, c.z, c.w]), 4))
+      lineRef.current.geometry = newGeom
+    }
+  })
+
+  return (
+    <line ref={lineRef}>
+      <bufferGeometry />
+      <shaderMaterial
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        transparent
+      />
+    </line>
+  )
+}
+
+
+
+export default function PenDrawingScene() {
+  const penRef = useRef<THREE.Object3D>(null!)
+
+  const getPenTipWorld = () => {
+    if (!penRef.current) return null
+    return PEN_TIP_LOCAL.clone().applyMatrix4(penRef.current.matrixWorld)
+  }
 
   useFrame((state, delta) => {
-    if (!particlesRef.current || !boxRef.current) return
-    easing.damp3(boxRef.current.position, [state.pointer.x - 0.2, 0, -state.pointer.y], 0.3, delta)
+    if (!penRef.current) return
 
-    const posAttr = particlesRef.current.geometry.attributes.position
-    const pos = posAttr.array as Float32Array
-    
-    // Get the cube's position
-    const cubePos = boxRef.current.position
+    // Position follows mouse on XZ plane
+    easing.damp3(
+      penRef.current.position,
+      [
+        state.pointer.x * 1.2,
+        0,
+        -state.pointer.y * 1.2
+      ],
+      0.3,
+      delta
+    )
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3
+    // Slight wrist rotation
+    penRef.current.rotation.x = THREE.MathUtils.lerp(
+      penRef.current.rotation.x,
+      state.pointer.y * 0.4,
+      0.1
+    )
+    penRef.current.rotation.z = THREE.MathUtils.lerp(
+      penRef.current.rotation.z,
+      state.pointer.x * 0.4,
+      0.1
+    )
 
-      let px = pos[i3]
-      let py = pos[i3 + 1]
-      let pz = pos[i3 + 2]
-
-      let vx = velocities[i3]
-      let vy = velocities[i3 + 1]
-      let vz = velocities[i3 + 2]
-
-      /* -------- Distance to cube check -------- */
-      const dx = px - cubePos.x
-      const dy = py - cubePos.y
-      const dz = pz - cubePos.z
-      const distSq = dx * dx + dy * dy + dz * dz
-
-      // If particle is within range of the cube
-      if (distSq < DISPLACEMENT_RADIUS * DISPLACEMENT_RADIUS) {
-        const dist = Math.sqrt(distSq) + 0.0001
-        const force = (1 - dist / DISPLACEMENT_RADIUS) * DISPLACEMENT_FORCE
-
-        // Direction from cube center to particle
-        const nx = dx / dist
-        const ny = dy / dist
-        const nz = dz / dist
-
-        // Push particles away from the cube
-        vx += nx * force
-        vy += ny * force
-        vz += nz * force
-        
-        // Add some swirl effect
-        vy += nz * force * 0.5
-        vz -= ny * force * 0.5
-      }
-
-      /* -------- Physics Integration -------- */
-      vx += FLOW_SPEED
-      vx *= 0.98 // Damping
-      vy *= 0.95
-      vz *= 0.95
-
-      px += vx
-      py += vy
-      pz += vz
-
-      /* -------- Respawn Logic -------- */
-      if (px > STREAM_WIDTH / 2) {
-        px = -STREAM_WIDTH / 2
-        py = (Math.random() - 0.5) * STREAM_HEIGHT
-        pz = (Math.random() - 0.5) * STREAM_DEPTH
-        vx = FLOW_SPEED
-        vy = 0
-        vz = 0
-      }
-
-      // Write back to arrays
-      velocities[i3] = vx
-      velocities[i3 + 1] = vy
-      velocities[i3 + 2] = vz
-      pos[i3] = px
-      pos[i3 + 1] = py
-      pos[i3 + 2] = pz
-    }
-
-    posAttr.needsUpdate = true
+    penRef.current.updateMatrixWorld()
   })
+
   return (
     <>
-      <mesh ref={boxRef} scale={0.5}>
-        <sphereGeometry/>
-        <meshBasicMaterial color={'black'} />
-      </mesh>
-
-      {/* Particles */}
-      <points ref={particlesRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            args={[positions, 3]}
-          />
-        </bufferGeometry>
-        <pointsMaterial
-          size={PARTICLE_SIZE}
-          color="#ffffff"
-          transparent
-          opacity={0.75}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-        />
-      </points>
-      <Environment preset="studio" />
+      <Pen ref={penRef} />
+      <DrawLine getPoint={getPenTipWorld} />
+      <Environment files="colorful_studio.exr" />
     </>
   )
 }

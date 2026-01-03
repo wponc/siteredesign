@@ -1,6 +1,5 @@
 import WritingScene from "../scenes/WritingScene"
 import { Canvas } from "@react-three/fiber"
-import { EffectComposer, Pixelation } from "@react-three/postprocessing";
 
 
 export default function Writing() {
@@ -8,9 +7,10 @@ export default function Writing() {
     <>
     <Canvas
         style={{ width: "100vw", height: "100vh" }}
-        camera={{ position: [0, 5, 1]}}
+        camera={{ position: [0, 2, 2]}}
       >
       <WritingScene />
+
     </Canvas>
     <section>
       <h1>Writing</h1>
@@ -81,7 +81,7 @@ export default function Writing() {
         <div className="essay" id='favor'>
           <p>Writing content goes here.</p>
           
-        </div>`
+        </div>
 
     </section>
 
