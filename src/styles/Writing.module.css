@@ -1,0 +1,89 @@
+:root{
+  --dark-background-color: #0C0C0C;
+  --dark-text-color: #0C0C0C;
+  --dark-accent-color: #3C775A;
+  
+  --light-background-color: #F5F5F2;
+  --light-text-color: #F5F5F2;
+  --light-accent-color: #0F2A1D;
+
+}
+* {
+  color: var(--light-text-color);
+}
+  .writingBlurb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+section{
+  min-height: 100vh;
+  padding: 5% 5% 5% 5%;
+}
+
+.book{
+  min-height: 100vh;
+  padding-bottom: 20vh;
+} 
+
+p{
+  font-size: 18pt;
+  line-height: 5vh;
+}
+.essay{
+  min-height: 100vh;
+  padding-bottom: 20vh;
+} 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--dark-background-color);
+  color: var(--light-text-color);
+}
+
+.carousel {
+  position: sticky;
+  top: 0;
+  height: 50vh;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--dark-background-color);
+  z-index: 10;
+}
+
+.card {
+  position: absolute;
+  width: 20%;
+  height: 80%;
+  transition: transform 0.6s ease, filter 0.6s ease, opacity 0.6s ease;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.text {
+  padding: 60px 0 120px;
+  max-width: 60vw;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+
+/* .review{
+  
+}
+.scrap{
+
+} */

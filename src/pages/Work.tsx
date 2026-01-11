@@ -7,6 +7,8 @@ export default function Work() {
     <>
       <Canvas
         style={{ width: "100vw", height: "100vh" }}
+        camera={{ position: [0, 1, 1], fov: 50 }}
+        gl={{ antialias: true, alpha: true }}
       >
       <WorkScene />
       <Preload all />

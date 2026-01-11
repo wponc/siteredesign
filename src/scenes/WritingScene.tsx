@@ -1,6 +1,6 @@
 import { useRef, forwardRef, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
-import { useGLTF, Environment, MeshTransmissionMaterial } from "@react-three/drei"
+import { useGLTF, Environment, MeshTransmissionMaterial, MeshReflectorMaterial } from "@react-three/drei"
 import * as THREE from "three"
 import { easing } from "maath"
 import { EffectComposer, Bloom, DepthOfField, ToneMapping } from '@react-three/postprocessing'
@@ -9,7 +9,7 @@ import { EffectComposer, Bloom, DepthOfField, ToneMapping } from '@react-three/p
 const PEN_TIP_LOCAL = new THREE.Vector3(0, -0.1, 0)
 
 const Pen = forwardRef<THREE.Object3D>((_, ref) => {
-  const { scene } = useGLTF("/penCompressed.glb")
+  const { scene } = useGLTF("/models/penCompressed.glb")
 
   return (
     <group ref={ref}>
@@ -31,11 +31,10 @@ const Pen = forwardRef<THREE.Object3D>((_, ref) => {
               samples={8}
               resolution={32}
               transmission={1}
-              roughness={0.4}
+              roughness={0.8}
               thickness={0.9}
               chromaticAberration={0.9}
-              color={'#ffffff'}
-              attenuationColor={'#ffffff'}
+              backsideThickness={0.5}
             />
           </mesh>
         )
@@ -44,7 +43,7 @@ const Pen = forwardRef<THREE.Object3D>((_, ref) => {
   )
 })
 
-useGLTF.preload('/penCompressed.glb')
+useGLTF.preload('/models/penCompressed.glb')
 function DrawLine({ getPoint }: { getPoint: () => THREE.Vector3 | null }) {
   const lineRef = useRef<THREE.Line>(null!)
   const points = useRef<{ point: THREE.Vector3; time: number }[]>([])
@@ -130,9 +129,9 @@ export default function PenDrawingScene() {
     easing.damp3(
       penRef.current.position,
       [
-        state.pointer.x * 1.2,
+        state.pointer.x * 1.6,
         0,
-        -state.pointer.y * 1.2
+        -state.pointer.y * 1.6
       ],
       0.3,
       delta
@@ -157,7 +156,7 @@ export default function PenDrawingScene() {
     <>
       <Pen ref={penRef} />
       <DrawLine getPoint={getPenTipWorld} />
-      <Environment files="colorful_studio.exr" />
+      <Environment files="hdris/colorful_studio.exr" />
     </>
   )
 }

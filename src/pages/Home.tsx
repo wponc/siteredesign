@@ -1,5 +1,6 @@
 import HomeScene from "../scenes/HomeScene"
 import { Canvas } from "@react-three/fiber"
+import styles from "../styles/Home.module.css"
 
 export default function Home() {
   return (
@@ -13,9 +14,10 @@ export default function Home() {
         <HomeScene />
       </Canvas>
       
-      <div className="landing-text-container">
-        <h1 className="landing-text">however you got here...</h1>
-        <h1 className="landing-text">I'm so glad you made it</h1>
+      <div className={styles.landingTextContainer}>
+        <h1 className={styles.landingText}>however you got here...</h1>
+        <h1 className={styles.landingText}>I'm so glad you made it</h1>
+        <h1 className={styles.landingText}>take a look around, stay a while</h1>
       </div>
     </div>
     </>

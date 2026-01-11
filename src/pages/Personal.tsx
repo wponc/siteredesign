@@ -6,7 +6,7 @@ export default function Personal() {
     <>
     <Canvas
         style={{ width: "100vw", height: "100vh" }}
-        camera={{ position: [-.5, 0, 2], fov: 45 }}
+        camera={{ position: [-.5, 1, 2], fov: 45 }}
       >
       <PersonalScene />
     </Canvas>

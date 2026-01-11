@@ -1,4 +1,4 @@
-import { OrbitControls, Environment, useGLTF, MeshTransmissionMaterial, Lightformer } from "@react-three/drei"
+import { OrbitControls, Environment, Center, useGLTF, MeshTransmissionMaterial, Lightformer } from "@react-three/drei"
 import { useRef, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
 import { Group, MeshPhysicalMaterial } from "three"
@@ -56,31 +56,16 @@ export default function PersonalScene() {
   return (
     <>
       <OrbitControls />
-      <ambientLight intensity={0.3}/>
-      <group >
-        <Model rotation={[0, -Math.PI * .9, .2]} />
+      <Model rotation={[0, -Math.PI * 1.1, .2]} />
         <Environment frames={1} resolution={256}>
           <Lightformer 
             color="#fff6f6" 
-            position={[0, 0.5, 1]} 
-            form={'ring'} 
+            position={[-1, -1, -1]} 
+            form={'rect'} 
             ref={l1}
             intensity={5} 
           />
-          {/* <Lightformer  
-            color="#f6f8ff" 
-            position={lightformer2Position.Lightformer2} 
-            form={'rect'} 
-            intensity={3} 
-          /> */}
-          {/* <Lightformer 
-            color="#f6fff9" 
-            position={lightformer3Position.Lightformer3} 
-            form={'ring'} 
-            intensity={10} 
-          /> */}
         </Environment>
-      </group>
     </>
   );
 }
