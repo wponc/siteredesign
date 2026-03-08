@@ -12,7 +12,7 @@ import { easing } from "maath"
 // }
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF('/newSceneExportCompressed.glb')
+  const { nodes, materials } = useGLTF('/models/newSceneExportCompressed.glb')
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -128,7 +128,7 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/newSceneExportCompressed.glb')
+useGLTF.preload('/models/newSceneExportCompressed.glb')
 
 
 

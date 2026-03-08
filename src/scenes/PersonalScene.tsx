@@ -1,71 +1,91 @@
 import { OrbitControls, Environment, Center, useGLTF, MeshTransmissionMaterial, Lightformer } from "@react-three/drei"
 import { useRef, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
-import { Group, MeshPhysicalMaterial } from "three"
+import { Group, MeshPhysicalMaterial, Color } from "three"
 import { useControls } from 'leva'
 
 function Model(props) {
-  const { nodes, materials } = useGLTF('/separatedProfileSmoothed.glb')
+  const { nodes, materials } = useGLTF('/models/headWithShadeSmoothCompressed.glb')
+  
   return (
     <group {...props} dispose={null} >
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.face.geometry}>
-        <MeshTransmissionMaterial
+        geometry={nodes.head.geometry}>
+           <MeshTransmissionMaterial
+          backside
           samples={8}
-          resolution={16}
+          resolution={256}
           transmission={1}
-          roughness={0.2}
+          roughness={0.1}
+          clearcoat={1}
           thickness={0.8}
-          chromaticAberration={0.7}
+          chromaticAberration={0.4}
+          anisotropy={1}
           color={'#ffffff'}
           attenuationColor={'#ffffff'}
         />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.hair.geometry}
-      >
-      <meshPhysicalMaterial
-        color="darkgray"
-        metalness={0.9}
-        roughness={0.2}
-      />
       </mesh>
     </group>
   )
 }
 
-useGLTF.preload('/separatedProfileSmoothed.glb')
+useGLTF.preload('/models/headWithShadeSmoothCompressed.glb')
 
 export default function PersonalScene() {
-  const lightGroup = useRef<Group | null>(null);
-  const l1 = useRef(null);
-  
-  // const lightformer1Position = useControls({'Lightformer1': [-.2, .5, -.1]})
-  // const lightformer2Position = useControls({'Lightformer2': [0, 0, -.2]})
-  // const lightformer3Position = useControls({'Lightformer3': [0, 2, 0]})
-  useFrame((state) => {
-    if (l1.current) {
-      l1.current.position.x = Math.sin(state.clock.elapsedTime * 0.5) * .5
-    }
-  })
+  const lightformersRef = useRef(null)
+
+  const lightformer1Position = useControls({'Lightformer1Position': { value: [-1.5, 1.5, 1], step: 0.1 }})
+  const lightformer2Position = useControls({'Lightformer2Position': { value: [2, -1, 1.5], step: 0.1 }})
+  const lightformer3Position = useControls({'Lightformer3Position': { value: [0, 2, -1], step: 0.1 }})
+  const lightformer4Position = useControls({'Lightformer4Position': { value: [-2, -1.5, 4], step: 0.1 }})
+
 
   return (
     <>
+      <color attach="background" args={['#000000']} />
       <OrbitControls />
       <Model rotation={[0, -Math.PI * 1.1, .2]} />
-        <Environment frames={1} resolution={256}>
+      <group ref={lightformersRef}>
+        
+        <Environment frames={1} resolution={512}>
           <Lightformer 
-            color="#fff6f6" 
-            position={[-1, -1, -1]} 
+            color="ffffff" 
+            position={lightformer1Position.Lightformer1Position} 
             form={'rect'} 
-            ref={l1}
-            intensity={5} 
-          />
+            intensity={2}
+            scale={[2, 2, 1]}
+            />
+          <Lightformer 
+            color="88aaff" 
+            position={lightformer2Position.Lightformer2Position} 
+            form={'rect'} 
+            intensity={2}
+            scale={[2, 2, 1]}
+            />
+          <Lightformer 
+            color="ffccaa" 
+            position={lightformer3Position.Lightformer3Position} 
+            form={'circle'} 
+            intensity={2}
+            scale={1.5}
+            />
+          <Lightformer 
+            color="white" 
+            position={lightformer4Position.Lightformer4Position} 
+            form={'rect'} 
+            intensity={2}
+            scale={[1.5, 1.5, 1]}
+            />
+            {/* <Lightformer
+              position={[0,0,5]}
+              scale={[10,10,1]}
+              intensity={1}
+              color="white"
+            /> */}
         </Environment>
+      </group>
     </>
   );
 }

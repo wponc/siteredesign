@@ -29,7 +29,7 @@ export default function HomeScene() {
       </Environment> 
 
       <mesh ref={meshRef} rotation={randomRotation.current}>
-        <torusKnotGeometry args={[4, .3, 128, 16]} />
+        <torusKnotGeometry args={[3, .3, 128, 16]} />
         <MeshTransmissionMaterial
           backside
           samples={2}

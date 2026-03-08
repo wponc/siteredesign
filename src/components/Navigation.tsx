@@ -3,10 +3,10 @@ import { Link } from "react-router"
 export default function Navigation() {
   return (
     <nav>
-      <Link to="/">HOME</Link>
-      <Link to="/work">WORK</Link>
-      <Link to="/writing">WRITING</Link>
-      <Link to="/personal">PERSONAL</Link>
+      <Link to="/">Home</Link>
+      <Link to="/work">Work</Link>
+      <Link to="/writing">Writing</Link>
+      <Link to="/personal">Personal</Link>
     </nav>
   )
 }

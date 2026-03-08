@@ -28,13 +28,17 @@ section{
 } 
 
 p{
-  font-size: 18pt;
+  font-size: 15pt;
   line-height: 5vh;
 }
 .essay{
   min-height: 100vh;
   padding-bottom: 20vh;
 } 
+.essay > p{
+  font-size: 13pt;
+
+}
 .wrapper {
   display: flex;
   flex-direction: column;
