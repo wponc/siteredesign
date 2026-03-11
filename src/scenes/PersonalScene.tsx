@@ -1,12 +1,13 @@
 import { OrbitControls, Environment, Center, useGLTF, MeshTransmissionMaterial, Lightformer } from "@react-three/drei"
 import { useRef, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
-import { Group, MeshPhysicalMaterial, Color } from "three"
 import { useControls } from 'leva'
+import { easing } from 'maath'
+
 
 function Model(props) {
-  const { nodes, materials } = useGLTF('/models/headWithShadeSmoothCompressed.glb')
-  
+  const { nodes, materials } = useGLTF('/models/heeadProfileSmoothedCompressed.glb')
+  console.log('nodes', nodes)
   return (
     <group {...props} dispose={null} >
       <mesh
@@ -31,9 +32,16 @@ function Model(props) {
   )
 }
 
-useGLTF.preload('/models/headWithShadeSmoothCompressed.glb')
+useGLTF.preload('/models/heeadProfileSmoothedCompressed.glb')
 
 export default function PersonalScene() {
+
+  useFrame((state, delta) => { 
+    easing.damp3(state.camera.position, [state.pointer.x, state.pointer.y + 1, 3], .5, delta) 
+    state.camera.lookAt(0, 0, 0) 
+  })
+  
+  
   const lightformersRef = useRef(null)
 
   const lightformer1Position = useControls({'Lightformer1Position': { value: [-1.5, 1.5, 1], step: 0.1 }})
@@ -44,9 +52,9 @@ export default function PersonalScene() {
 
   return (
     <>
-      <color attach="background" args={['#000000']} />
-      <OrbitControls />
-      <Model rotation={[0, -Math.PI * 1.1, .2]} />
+      <color attach="background" args={['#0C0C0C']} />
+      {/* <OrbitControls /> */}
+      <Model rotation={[0, -Math.PI, .2]} />
       <group ref={lightformersRef}>
         
         <Environment frames={1} resolution={512}>

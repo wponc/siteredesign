@@ -32,8 +32,8 @@ export default function HomeScene() {
         <torusKnotGeometry args={[3, .3, 128, 16]} />
         <MeshTransmissionMaterial
           backside
-          samples={2}
-          resolution={64}
+          samples={16}
+          resolution={256}
           transmission={1}
           roughness={0.1}
           clearcoat={1}

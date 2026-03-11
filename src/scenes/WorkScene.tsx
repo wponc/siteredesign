@@ -144,13 +144,17 @@ export default function PersonalScene() {
       <mesh>
         <icosahedronGeometry />
         <MeshTransmissionMaterial
-            samples={8}
-            transmission={1}
-            roughness={0.1}
-            thickness={0.2}
-            chromaticAberration={0.2}
-            color={'#ffffff'}
-            attenuationColor={'#ffffff'}
+          backside
+          samples={16}
+          resolution={256}
+          transmission={1}
+          roughness={0.1}
+          clearcoat={1}
+          thickness={0.8}
+          chromaticAberration={0.9}
+          anisotropy={1}
+          color={'#ffffff'}
+          attenuationColor={'#ffffff'}
           />
       </mesh>
       {/* <Stars radius={10} count={300}  fade /> */}

@@ -28,13 +28,16 @@ const Pen = forwardRef<THREE.Object3D>((_, ref) => {
           >
             <MeshTransmissionMaterial
               backside
-              samples={8}
-              resolution={32}
+              samples={16}
+              resolution={256}
               transmission={1}
-              roughness={0.8}
-              thickness={0.9}
+              roughness={0.1}
+              clearcoat={1}
+              thickness={0.8}
               chromaticAberration={0.9}
-              backsideThickness={0.5}
+              anisotropy={1}
+              color={'#ffffff'}
+              attenuationColor={'#ffffff'}
             />
           </mesh>
         )
