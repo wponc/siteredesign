@@ -1,18 +1,10 @@
 import WorkScene from "../scenes/WorkScene"
-import { Canvas } from "@react-three/fiber"
-import { Preload } from "@react-three/drei"
 
 export default function Work() {
   return (
     <>
-      <Canvas
-        style={{ width: "100vw", height: "100vh" }}
-        camera={{ position: [0, 1, 1], fov: 50 }}
-        gl={{ antialias: true, alpha: true }}
-      >
-      <WorkScene />
-      <Preload all />
-    </Canvas>
+
+    <WorkScene />
 
     <section id="work">
       <h1>Work</h1>

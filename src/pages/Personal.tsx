@@ -1,15 +1,9 @@
 import PersonalScene from "../scenes/PersonalScene"
-import { Canvas } from "@react-three/fiber"
 
 export default function Personal() {
   return (
     <>
-    <Canvas
-        style={{ width: "100vw", height: "100vh" }}
-        camera={{ fov: 45 }}
-      >
-      <PersonalScene />
-    </Canvas>
+    <PersonalScene />
 
     <section>
       <h1>bio</h1>

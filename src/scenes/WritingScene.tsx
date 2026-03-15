@@ -1,10 +1,22 @@
 import { useRef, forwardRef, useEffect } from "react"
-import { useFrame } from "@react-three/fiber"
-import { useGLTF, Environment, MeshTransmissionMaterial, MeshReflectorMaterial } from "@react-three/drei"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { useGLTF, Environment, MeshTransmissionMaterial, MeshReflectorMaterial, Preload } from "@react-three/drei"
 import * as THREE from "three"
 import { easing } from "maath"
 import { EffectComposer, Bloom, DepthOfField, ToneMapping } from '@react-three/postprocessing'
 
+export default function WritingScene(){
+  return(
+  <Canvas
+    style={{ width: "100vw", height: "100vh", position: "relative" }}
+    camera={{ position: [0, 3, 1]}}
+    gl={{ antialias: true, alpha: true }}
+  >
+    <Scene/>
+    <Preload all />
+  </Canvas>
+  )
+}
 
 const PEN_TIP_LOCAL = new THREE.Vector3(0, -0.1, 0)
 
@@ -47,6 +59,7 @@ const Pen = forwardRef<THREE.Object3D>((_, ref) => {
 })
 
 useGLTF.preload('/models/penCompressed.glb')
+
 function DrawLine({ getPoint }: { getPoint: () => THREE.Vector3 | null }) {
   const lineRef = useRef<THREE.Line>(null!)
   const points = useRef<{ point: THREE.Vector3; time: number }[]>([])
@@ -117,7 +130,7 @@ function DrawLine({ getPoint }: { getPoint: () => THREE.Vector3 | null }) {
 
 
 
-export default function PenDrawingScene() {
+function Scene() {
   const penRef = useRef<THREE.Object3D>(null!)
 
   const getPenTipWorld = () => {

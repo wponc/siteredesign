@@ -1,9 +1,26 @@
-
 import { useRef, useMemo, useState, useEffect } from "react"
-import { useFrame } from "@react-three/fiber"
-import { MeshTransmissionMaterial, OrbitControls, Environment, Lightformer} from "@react-three/drei"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { MeshTransmissionMaterial, OrbitControls, Environment, Lightformer, Preload} from "@react-three/drei"
+import { Bloom, DepthOfField, EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
+
 
 export default function HomeScene() {
+  return(
+  <Canvas
+    style={{ width: "100vw", height: "100vh", position: "relative" }}
+    camera={{ position: [0, 1.8, 4], fov: 45 }}
+    dpr={[1, 2]}
+  >
+    <Scene />
+    {/* <EffectComposer>
+      <Bloom intensity={0.5} />
+    </EffectComposer> */}
+    <Preload all />
+  </Canvas>
+  )
+}
+
+function Scene(){
   const meshRef = useRef(null)
 
   const randomRotation = useRef([
@@ -42,9 +59,8 @@ export default function HomeScene() {
           anisotropy={1}
           color={'#ffffff'}
           attenuationColor={'#ffffff'}
-        />
+          />
       </mesh>
-
       {/* <OrbitControls /> */}
     </>
   )

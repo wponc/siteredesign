@@ -1,7 +1,135 @@
 import WritingScene from "../scenes/WritingScene"
-import { Canvas } from "@react-three/fiber"
 import styles from "../styles/Writing.module.css"
 import { useState, useEffect, useRef } from "react"
+
+function Books(){
+  return(
+    <>
+     <div className={styles.book} id='passenger'>
+        <h2>The Passenger - Cormac McCarthy</h2>
+        <p><i>I wish you calm waters, Squire.</i><br/>
+        <br/><br/>What you have here is McCarthy at the end of his career, at the end of his life, he is swinging all the way for the fences. He is asking the big wuestions, questiond like: why are we all here?; who do we become when we lose the only thing that matters to us?; and, what do we leave behind from this life, if anything at all?</p>
+      </div>
+
+
+      <div className={styles.book} id='swannsway'>
+        <h2>In Search of Lost Time Volume I: Swann's Way - Marcel Proust</h2>
+        <p>Incredible. A glimmering, silky, heart-tugging marvel.<br/><br/>
+        Proust constructs his sentences so comprehensively that he considers every angle of a given thought. His ability to transport the reader into the smallest details at the periphery of his own memories is unmatched. The innocence, the love, the purity of his early days in Combray truly bring a smile to one's face, a reminder of the simplicity of childhood; the joy to be found in reliving those experiences. His gratitude for walks struck a particular chord in me: <i>When I attempt to reckon up all that I owe to the Méséglise way…</i><br/>Reading this book, I’m reminded that I’m a lucky man, a rich man, for having the brilliant company of <u>just so many</u> walks throughout my life.<br/><br/>
+        Swann's love for and eventual loss of Odette is built in such an  impeccably gradual manner by Proust, bringing the reader on the full parabola of love's emotions through coexistence, interest, infatuation, jealousy, and eventually, contempt. I'd imagine Swann's inner turmoil to be all-too-familiar to every reader some point in their lives, "satisfying a sensual curiosity of discovering those who live for love alone”. <br/><br/>
+        I guess in some ways I was drawn to this begin series because  (and not to be too lofty here) I’d been searching for lost time of my own, dwelling in the past, convinced that I could somehow relive the glory of days long ago if I reminisced on them hard enough. And having taken only the first step on the path through Proust's masterpiece, I’m amazed at how timeless some the lessons are regarding memory, loss, chance, and all of life's other ephemera that are so hard to articulate. At risk of getting ahead of myself, I can already validate the claims that Proust is one of the most talented writers in history, and I look forward to progressing through the series.
+        </p>
+      </div>
+
+      <div className={styles.book} id='recognitions'>
+        <h2>The Recogitions - William Gaddis</h2>
+        <p>Make no mistake, in his debut novel, Gaddis establishes himself as a titan of american literature, with some sentences constructed so explosively that you can't help but read them thrice over to appreciate their severity. <br/><br/>
+        His influence on several later, more recognized (no pun intended) authors like Cormac McCarthy and Don DeLillo is abundantly clear. It is stunning just how much Gaddis packs into each page<span>&#8212;</span>even despite the tome’s 956-page length<span>&#8212;</span>made all the more evident by Steven Moore's priceless guide. For a reader like myself with little exposure to painting, world religions, and philosophy, the work contained some poignant mediations on the broader purposes of art. And despite the risk of pretention with tackling these subjects, the work contains a schoolyard profanity and ear for dialogue that is laugh-out-loud funny, surprisingly so for a book over 70 years old. One of my favorite aspects (as noted by Chris Via) is how it implicates the reader in its own ruse. In that, Gaddis plants ideas in the middle of conversations (a spot of moonlight on a sleeve, a crude joke, a raised eyebrow, etc.), and revisits them hundreds of pages later, sometimes with different characters, forcing <i>our own recognitions</i> within the work.  <br/><br/>
+        With all that said, it's not necessaruly a book I'd recommend to others, save for the hardcore reader. I found little to latch on to in the events of the story or the motivations of the characters, which could be a sign of the times or a just shortcoming of my own imagination. Often, I preferred to focus on Gaddis's style itself; content to admire his word choice and form.<br/><br/>
+        Love it or hate it, I can't deny Gaddis's talent. This is the type of book that demands a rereading many, many years down the line, when you've finally caught your breath from the first pass up the mountain.</p>
+      </div>
+
+      <div className={styles.book}id='lonesomedove'>
+        <h2>Lonesome Dove - Larry McMurtry</h2>
+        <p>A weighted, highly memorable intertwining tale of the somewhat unbelievable way of life that was once typical for much of America. A sobering tale of responsibility, masculinity, and friendship. There are few lengths we won't travel to protect those that we love, or, in Call's case, those whom we feel indebted to. <br/><br/>
+        McMurtry's has an understated tone that creates characters succinctly, without making them feel one-dimensional, but rather as if you’ve known them for many years, and you’ve become accustomed to their characteristic charm. <br/><br/>
+        The book <i>just ends,</i> and you're left with a paperweight on your chest symbolic of the hardship characteristic to the times. Times where, to my understanding, men of a certain persuasion were just left in the dirt, with a stick to mark their place of final rest. 
+        </p>
+      </div>
+
+      <div className={styles.book} id='paleking'>
+        <h2>The Pale King - David Foster Wallace</h2>
+        <p>Wallace bursts out the starting gate in this one. The opening section grabs the reader immediately with its sensory arrangment of the landscape's components, beckoning them, <i>Read these.</i> I am of the belief that it is intended to be unfinished, and I’d go so far as to say that work like this is enhanced by<span>&#8212;</span>and could only exist due to<span>&#8212;</span>the fact that it is unfinished.<br/><br/>
+        Wallace's characters are people you can imagine, those you've seen and met and interacted with in the office, and wondered what their parents believed in, where they get their hair cut, or what quirks did they had as a kid which made them different from others.<br/><br/>
+        It is, pound-for-pound, the funniest book I've read, with an ability to generate laughter through dialogue, through unbelievable circumstance, through "soul-shearing" mundanity, through metatextual cheekiness, that is suprisingly consistent throughout the numerous, variable sections. An excellent primer for Wallace's magnum opus, Infinite Jest.</p>
+      </div>
+
+      <div className={styles.book} id='plains'>
+        <h2>The Plains</h2>
+        <p>A heady, intoxicating blur of geography, landscapes, identity, and consciousness. Murnane's prose loads in memory, and remains lodged there until a golden afternoon glints off of a peripheral surface, <i>just so.</i><br/><br/>
+        Similar to Gaddis’s trick, Murnane forces the reader to impart their own meaning onto the plains of their life. This book should be required reading for any introductory collegiate course in geography and anthropology. “There must have been many a man who knew…”</p>
+        <br />
+
+      </div>
+    </>
+  )
+}
+
+function Essays(){
+  return(
+    <>
+        <div className={styles.essay} id='straits'>
+          <h2>Straits</h2>
+          <p>YOU LEFT, and for some time after I couldn’t fathom it to be real. Our memories felt so strangely fabricated: the literature of a forgotten empire with no academics to confirm their validity. That picture of us, sunburnt and smiling after my soccer game, was captured in a restaurant now closed down with a team long since disbanded. It seemed as if any memory of us together was working hard to erase itself, vanishing from self-immolation. I wanted nothing more than to just ask random passersby “did you know him?” These memories couldn’t belong to me alone. 
+          <br/><br/>
+          The neighbors sobbed when we cleaned out your house; the days flowed downslope. Time meandered on its own accord, and I burned through the waking hours as quickly as I could. Most of those days I stayed late at the office, hypnotized by the sunset’s shimmer on the glass buildings across the pond, watching the trees move beyond the window at the end of the hall. I was lost trying to navigate a world beyond you: no longer the one we shared, but a new world overlaid on this one with undefined projection, invalid geometry, flat shading.
+          <br/><br/>
+          For weeks I ran exhaustive routes around your memory, replaying the music you showed me, music from your time, Oingo Boingo and the like. The music I shared with you–well I guess you weren’t such a fan of. I remembered the pranks you played, always embarrassing me for my own benefit. A hip-check into a row of bushes was an ever-present threat, and if our waitress at dinner was a pretty girl, you’d tell her I loved her just to torture me. Months passed where I saw you in everyone else. Minute idiosyncrasies were thornful callbacks to past parts and pieces, now disassembled, strewn about everfading memory, begging for repurpose.
+          <br/><br/>
+          For me, one of our last conversations is forever cast in amber<span>&#8212;</span>a moment we finally saw each other in honest regard. I’d called you with cinder blocks on my heart asking of the crossroads in your younger years, finally willing to admit the fear I’d held tethered between the fragile spires of future plans. In a moment of off-color relatability you asked “do you ever have those days where you wake up wishing you hadn’t?”, and just for a second the cracks had started to show. 
+          <br/>
+          If I could just make that call last a little longer, there’s not a lot I wouldn’t give twice over. If I had one more chance I would tell you everything: all the failures and fuckups, every fear and flaw of mine, details spared none. And if it led to your rejection, so be it, my cross to bear. That way, we could say that we truly knew each other<span>&#8212;</span>even if it was only for a moment<span>&#8212;</span>before you left this earth.
+          <br/><br/>
+          You were a man of huge ideas, some might say to a fault. More than capable and impossibly determined you went about them with fervor. But I guess life, or more accurately the fragility of it all, got in the way. Though you were never quite able to realize some things you’d planned, I have to remember that doesn’t mean you didn’t have them, you were always moving towards them. 
+          <br/><br/>
+          Like how you spoke of moving to Maine one day, and if by design, a job took me there. The glasslike mudbanks across the sound, shimmered bluebeige gradients above and below, and slowswayed cordgrass held at their edges some promise you made that I had to keep. I walked miles around the cove and felt you in every step, extra tracks mirrored mine on the gravel trail. I walked towards you when I was afraid, from you when I was indignant, and with you while you still could. I can remember when we walked together for the last time<span>&#8212;</span>November, so many years ago. 
+          <br/><br/>
+          I remember so many things but I’ve already forgotten so many, the pain had a way of paving over the past and sealing everything that could have been under a watertight bond. All you’d ever wanted was my fulfillment and all I’d ever wanted was to make you proud, but we each pushed for those things in our equally misguided ways, repellent forces which could never truly harmonize. And for all our fights and fodder, words of vitriol, years of war, this was all we’d become: a lineage bankrupt by the conversations we were too afraid to have.
+          <br/><br/>
+          So call me naive, call me deluded, call me what you want, but I had to believe that there was still time. Time to make things right, time to be a better man. I know because you told me so, and that was all it took. I know because I had to believe it, if nothing else would get me out of bed every day. 
+          <br/><br/>
+          And I know because I remember you telling me that you were still in the fight, <i>even when straits were dire.</i></p>
+          
+        </div>
+        
+        <div className={styles.essay}id='favor'>
+          <h2>Letter to a Lost Love</h2>
+          <p>MY DYING WISH, my last request, is that you save space for me in your heart.
+          <br/><br/>
+          Take my memory, bury it under a stone, and let the years flow over it. You won't need it for now.
+          <br/><br/>
+          I ask this not to keep you for myself. I would never want to keep you for myself, because that's not what friends do to each other. I know people that have moved across the country, or across the world, and even though I miss them dearly I'm all the richer for ever having been in their orbit. I've made peace with the fact that our days together have come and gone. And that's okay. By the same principle, I loved growing up in Florida, chasing lizards around the yard and throwing mangos at my brother's head, but those days have come and gone too, and they have a place in my heart that will never be trespassed.
+          <br/><br/>
+          I ask this not in hopes that we would reunite. I know you’ll find care you deserve, the recognitions that you’ve earned, and the love so destined for you<span>&#8212;</span>love beyond anything I could have offered you. There's things you want in life that I'm just not the one to give you. And though that saddens me to say, my sadness only lasts for a second, because I can rest assured with peace knowing that you will get to experience them. Even if I'm not by your side when they happen, knowing that <i>you will enjoy them regardless</i> is good enough for me.
+          <br/><br/>
+          I need you to know, not question, but know deep in your heart, that I care about you. I did at the time, I do now, and I will for as far as I can see. Because, for years I was just a <b>dead man walking</b>, but you pulled me out of long string of darker days. I'm gonna owe you for that, forever. So I don’t want to, and I couldn’t even imagine going back to my life before I met you. Let's just consider all those days lost.
+          <br/><br/>
+          So I don't ask this with any ulterior motives, but only to appreciate what you've given me. I can remember a moment when we were laying on the shoreline, fast asleep, with your head held against my chest. <br/>I had <i>no idea</i> the implications of that moment on the years to follow. We were so young, how would I know?<br/>How would I know that even though I'd get the incredible privilege of flying drones worth tens of thousands of dollars, your love was <i>by far</i> the most valuable thing I would ever touch. Or, how would I know that even though I could crown my resume with a job I'd worked years to attain, our times spent doing the most trivial things were the <i>closest I've come</i> to feeling complete.
+          <br/><br/>
+          So I ask this, rather, purely out of gratitude. I don’t mean to be too abstract here, consider for a second the towering improbability that I would exist in this world in the first place. Seriously. Multiply that by the sheer impossibility that 1) you and I would exist in the same time, 2) in the same place, and 3) we would cross paths. By all accounts, we should not have even met. <br />
+          And yet, <i>there was something greater.</i><br />
+          Something which could ignore odds and outcomes, something which could brush off statistics and probabilities, and manufacture circumstances so extreme, so severe, that you and I could collide in this immeasurable void of darkness.<br/>
+          So I'm grateful for that: whoever tipped the scales, whoever loaded the dice in our favor that day, they have my regards.
+          <br/><br/>
+          So I'll ask one last time: save space for me in your heart, and keep preserved a monument to the hours that we spent together on this earth. I ask you this, so that on hard days when you forget just how much joy you bring to the people around you, you can dig up my memory, and recall the moments when we were talking, laughing, doing whatever. And maybe in doing so, my memory can bring to mind warmer days filled with heavy sunshine,
+          <br /><i>just as the memory of you has done for me.</i>
+          <br/><br/>
+          And that's all I ask: for the opportunity to return the favor.
+          </p>
+          
+        </div>
+  
+        <div className={styles.essay} id='love-letter'>
+          <h2>Love letter to Virginia</h2>
+          <p>During my interview, my former boss warned me that it was a very physical job that I was applying for, and she asked: Would I be able to carry weight up and down terrain? My response was that when I turned 13 my parents simply stopped hiring movers. We kept moving every couple years, but my brother and I were now at an age to provide unpaid manual labor. Hey fair is fair, they kept me clothed & fed me 18 years. 
+          <br/><br/>
+          So I got the job. And for years after I used to wake up early, tie my boots tight in the darkness of my room, and hit the road before the sun came up. I traveled all throughout the state of Virginia conducting site visits for conservation easements. In layman's terms, I hiked around in the woods all day, taking pictures with an iPad and flying a drone. I saw the of the cattle ranches of the Piedmont, the swamps of eastern Richmond, and the 
+          <br/><br/>
+          Come class time I would be on the other side of the state. Make no mistake, the site visits weren’t just a walk in the park. I was earning every cent of the intern pay, climbing over livewire cattle fences, running away from dogs, and trekking briar thickets.
+          <br/><br/>
+          Now, normally, the place in which you live becomes smaller with time. You begin to get around without using a map, you become familiar with the best places to eat, you make friends with people who live across town. Places get smaller, strings get tighter. With Virginia, it was exactly the opposite. The more I traveled Virginia the larger it grew, an ever-unfolding piece of origami, intoxicating sea of deep green forests, constantly unfolding. 
+          <br/><br/>
+          It wasn’t just my farm or my backyard, it was my family’s land, my livelihood. 
+          <br/><br/>
+          One landowner I’ll never forget. It was was eastern Richmond, late march, and we had just turned the corner out of the winter slumber when everything around was starting to wake up. We had finished our work for the day, and as we’re packing our gear to head out, and I go up to the landowner shake her hand, and say “thank you for showing us around your property”. And she looks at me, and smiles with tears in her eyes, and I swear to god, she says “It’s my life’s work”. And so it grew. 
+          <br/><br/>
+          I had known, I mean really gotten to know, the land in which I inhabited.
+          </p>
+          
+        </div>
+    </>
+  )
+}
 
 const entries = [
   {
@@ -315,149 +443,27 @@ function Scraps() {
 export default function Writing() {
   return (
     <>
-    <Canvas
-        style={{ width: "100vw", height: "100vh" }}
-        camera={{ position: [0, 3, 1]}}
-      >
+
       <WritingScene />
 
-    </Canvas>
-    <section className={styles.writingBlurb}>
-      <h1>Writing is my first love, full stop. One day, years ago, she sank her teeth in me.<br/>And for all the other vices I could waste a lifetime in courtship of,<br/><i>somehow, I just knew that I would find none more seductive.</i><br/><br/><br/>Take a look below at some things I've written: mini book reviews, essays, bits, pieces.</h1>
-    </section>
+      <section className={styles.writingBlurb}>
+        <h1>Writing is my first love, full stop. One day, years ago, she sank her teeth in me.<br/>And for all the other vices I could waste a lifetime in courtship of,<br/><i>somehow, I just knew that I would find none more seductive.</i><br/><br/><br/>Take a look below at some things I've written: mini book reviews, essays, bits, pieces.</h1>
+      </section>
 
-    <section className={styles.books}>
-      <h1>Book Reviews</h1>
+      <section className={styles.books}>
+        <h1>Book Reviews</h1>
+        <Books />    
+      </section>
 
-
-      <div className={styles.book} id='passenger'>
-        <h2>The Passenger - Cormac McCarthy</h2>
-        <p><i>I wish you calm waters, Squire.</i><br/>
-        <br/><br/>What you have here is McCarthy at the end of his career, at the end of his life, he is swinging all the way for the fences. He is asking the big wuestions, questiond like: why are we all here?; who do we become when we lose the only thing that matters to us?; and, what do we leave behind from this life, if anything at all?</p>
-      </div>
-
-
-      <div className={styles.book} id='swannsway'>
-        <h2>In Search of Lost Time Volume I: Swann's Way - Marcel Proust</h2>
-        <p>Incredible. A glimmering, silky, heart-tugging marvel.<br/><br/>
-        Proust constructs his sentences so comprehensively that he considers every angle of a given thought. His ability to transport the reader into the smallest details at the periphery of his own memories is unmatched. The innocence, the love, the purity of his early days in Combray truly bring a smile to one's face, a reminder of the simplicity of childhood; the joy to be found in reliving those experiences. His gratitude for walks struck a particular chord in me: <i>When I attempt to reckon up all that I owe to the Méséglise way…</i><br/>Reading this book, I’m reminded that I’m a lucky man, a rich man, for having the brilliant company of <u>just so many</u> walks throughout my life.<br/><br/>
-        Swann's love for and eventual loss of Odette is built in such an  impeccably gradual manner by Proust, bringing the reader on the full parabola of love's emotions through coexistence, interest, infatuation, jealousy, and eventually, contempt. I'd imagine Swann's inner turmoil to be all-too-familiar to every reader some point in their lives, "satisfying a sensual curiosity of discovering those who live for love alone”. <br/><br/>
-        I guess in some ways I was drawn to this begin series because  (and not to be too lofty here) I’d been searching for lost time of my own, dwelling in the past, convinced that I could somehow relive the glory of days long ago if I reminisced on them hard enough. And having taken only the first step on the path through Proust's masterpiece, I’m amazed at how timeless some the lessons are regarding memory, loss, chance, and all of life's other ephemera that are so hard to articulate. At risk of getting ahead of myself, I can already validate the claims that Proust is one of the most talented writers in history, and I look forward to progressing through the series.
-        </p>
-      </div>
-
-      <div className={styles.book} id='recognitions'>
-        <h2>The Recogitions - William Gaddis</h2>
-        <p>Make no mistake, in his debut novel, Gaddis establishes himself as a titan of american literature, with some sentences constructed so explosively that you can't help but read them thrice over to appreciate their severity. <br/><br/>
-        His influence on several later, more recognized (no pun intended) authors like Cormac McCarthy and Don DeLillo is abundantly clear. It is stunning just how much Gaddis packs into each page<span>&#8212;</span>even despite the tome’s 956-page length<span>&#8212;</span>made all the more evident by Steven Moore's priceless guide. For a reader like myself with little exposure to painting, world religions, and philosophy, the work contained some poignant mediations on the broader purposes of art. And despite the risk of pretention with tackling these subjects, the work contains a schoolyard profanity and ear for dialogue that is laugh-out-loud funny, surprisingly so for a book over 70 years old. One of my favorite aspects (as noted by Chris Via) is how it implicates the reader in its own ruse. In that, Gaddis plants ideas in the middle of conversations (a spot of moonlight on a sleeve, a crude joke, a raised eyebrow, etc.), and revisits them hundreds of pages later, sometimes with different characters, forcing <i>our own recognitions</i> within the work.  <br/><br/>
-        With all that said, it's not necessaruly a book I'd recommend to others, save for the hardcore reader. I found little to latch on to in the events of the story or the motivations of the characters, which could be a sign of the times or a just shortcoming of my own imagination. Often, I preferred to focus on Gaddis's style itself; content to admire his word choice and form.<br/><br/>
-        Love it or hate it, I can't deny Gaddis's talent. This is the type of book that demands a rereading many, many years down the line, when you've finally caught your breath from the first pass up the mountain.</p>
-      </div>
-
-      <div className={styles.book}id='lonesomedove'>
-        <h2>Lonesome Dove - Larry McMurtry</h2>
-        <p>A weighted, highly memorable intertwining tale of the somewhat unbelievable way of life that was once typical for much of America. A sobering tale of responsibility, masculinity, and friendship. There are few lengths we won't travel to protect those that we love, or, in Call's case, those whom we feel indebted to. <br/><br/>
-        McMurtry's has an understated tone that creates characters succinctly, without making them feel one-dimensional, but rather as if you’ve known them for many years, and you’ve become accustomed to their characteristic charm. <br/><br/>
-        The book <i>just ends,</i> and you're left with a paperweight on your chest symbolic of the hardship characteristic to the times. Times where, to my understanding, men of a certain persuasion were just left in the dirt, with a stick to mark their place of final rest. 
-        </p>
-      </div>
-
-      <div className={styles.book} id='paleking'>
-        <h2>The Pale King - David Foster Wallace</h2>
-        <p>Wallace bursts out the starting gate in this one. The opening section grabs the reader immediately with its sensory arrangment of the landscape's components, beckoning them, <i>Read these.</i> I am of the belief that it is intended to be unfinished, and I’d go so far as to say that work like this is enhanced by<span>&#8212;</span>and could only exist due to<span>&#8212;</span>the fact that it is unfinished.<br/><br/>
-        Wallace's characters are people you can imagine, those you've seen and met and interacted with in the office, and wondered what their parents believed in, where they get their hair cut, or what quirks did they had as a kid which made them different from others.<br/><br/>
-        It is, pound-for-pound, the funniest book I've read, with an ability to generate laughter through dialogue, through unbelievable circumstance, through "soul-shearing" mundanity, through metatextual cheekiness, that is suprisingly consistent throughout the numerous, variable sections. An excellent primer for Wallace's magnum opus, Infinite Jest.</p>
-      </div>
-
-      <div className={styles.book} id='plains'>
-        <h2>The Plains</h2>
-        <p>A heady, intoxicating blur of geography, landscapes, identity, and consciousness. Murnane's prose loads in memory, and remains lodged there until a golden afternoon glints off of a peripheral surface, <i>just so.</i><br/><br/>
-        Similar to Gaddis’s trick, Murnane forces the reader to impart their own meaning onto the plains of their life. This book should be required reading for any introductory collegiate course in geography and anthropology. “There must have been many a man who knew…”</p>
-        <br />
-
-      </div>
-    </section>
-
-    <section id='essays'>
-      <h1>Essays</h1>
+      <section className={styles.essays}>
+        <h1>Essays</h1>
+        <Essays />
+      </section>
       
-        <div className={styles.essay} id='straits'>
-          <h2>Straits</h2>
-          <p>YOU LEFT, and for some time after I couldn’t fathom it to be real. Our memories felt so strangely fabricated: the literature of a forgotten empire with no academics to confirm their validity. That picture of us, sunburnt and smiling after my soccer game, was captured in a restaurant now closed down with a team long since disbanded. It seemed as if any memory of us together was working hard to erase itself, vanishing from self-immolation. I wanted nothing more than to just ask random passersby “did you know him?” These memories couldn’t belong to me alone. 
-          <br/><br/>
-          The neighbors sobbed when we cleaned out your house; the days flowed downslope. Time meandered on its own accord, and I burned through the waking hours as quickly as I could. Most of those days I stayed late at the office, hypnotized by the sunset’s shimmer on the glass buildings across the pond, watching the trees move beyond the window at the end of the hall. I was lost trying to navigate a world beyond you: no longer the one we shared, but a new world overlaid on this one with undefined projection, invalid geometry, flat shading.
-          <br/><br/>
-          For weeks I ran exhaustive routes around your memory, replaying the music you showed me, music from your time, Oingo Boingo and the like. The music I shared with you–well I guess you weren’t such a fan of. I remembered the pranks you played, always embarrassing me for my own benefit. A hip-check into a row of bushes was an ever-present threat, and if our waitress at dinner was a pretty girl, you’d tell her I loved her just to torture me. Months passed where I saw you in everyone else. Minute idiosyncrasies were thornful callbacks to past parts and pieces, now disassembled, strewn about everfading memory, begging for repurpose.
-          <br/><br/>
-          For me, one of our last conversations is forever cast in amber<span>&#8212;</span>a moment we finally saw each other in honest regard. I’d called you with cinder blocks on my heart asking of the crossroads in your younger years, finally willing to admit the fear I’d held tethered between the fragile spires of future plans. In a moment of off-color relatability you asked “do you ever have those days where you wake up wishing you hadn’t?”, and just for a second the cracks had started to show. 
-          <br/>
-          If I could just make that call last a little longer, there’s not a lot I wouldn’t give twice over. If I had one more chance I would tell you everything: all the failures and fuckups, every fear and flaw of mine, details spared none. And if it led to your rejection, so be it, my cross to bear. That way, we could say that we truly knew each other<span>&#8212;</span>even if it was only for a moment<span>&#8212;</span>before you left this earth.
-          <br/><br/>
-          You were a man of huge ideas, some might say to a fault. More than capable and impossibly determined you went about them with fervor. But I guess life, or more accurately the fragility of it all, got in the way. Though you were never quite able to realize some things you’d planned, I have to remember that doesn’t mean you didn’t have them, you were always moving towards them. 
-          <br/><br/>
-          Like how you spoke of moving to Maine one day, and if by design, a job took me there. The glasslike mudbanks across the sound, shimmered bluebeige gradients above and below, and slowswayed cordgrass held at their edges some promise you made that I had to keep. I walked miles around the cove and felt you in every step, extra tracks mirrored mine on the gravel trail. I walked towards you when I was afraid, from you when I was indignant, and with you while you still could. I can remember when we walked together for the last time<span>&#8212;</span>November, so many years ago. 
-          <br/><br/>
-          I remember so many things but I’ve already forgotten so many, the pain had a way of paving over the past and sealing everything that could have been under a watertight bond. All you’d ever wanted was my fulfillment and all I’d ever wanted was to make you proud, but we each pushed for those things in our equally misguided ways, repellent forces which could never truly harmonize. And for all our fights and fodder, words of vitriol, years of war, this was all we’d become: a lineage bankrupt by the conversations we were too afraid to have.
-          <br/><br/>
-          So call me naive, call me deluded, call me what you want, but I had to believe that there was still time. Time to make things right, time to be a better man. I know because you told me so, and that was all it took. I know because I had to believe it, if nothing else would get me out of bed every day. 
-          <br/><br/>
-          And I know because I remember you telling me that you were still in the fight, <i>even when straits were dire.</i></p>
-          
-        </div>
-        
-        <div className={styles.essay}id='favor'>
-          <h2>Letter to a Lost Love</h2>
-          <p>MY DYING WISH, my last request, is that you save space for me in your heart.
-          <br/><br/>
-          Take my memory, bury it under a stone, and let the years flow over it. You won't need it for now.
-          <br/><br/>
-          I ask this not to keep you for myself. I would never want to keep you for myself, because that's not what friends do to each other. I know people that have moved across the country, or across the world, and even though I miss them dearly I'm all the richer for ever having been in their orbit. I've made peace with the fact that our days together have come and gone. And that's okay. By the same principle, I loved growing up in Florida, chasing lizards around the yard and throwing mangos at my brother's head, but those days have come and gone too, and they have a place in my heart that will never be trespassed.
-          <br/><br/>
-          I ask this not in hopes that we would reunite. I know you’ll find care you deserve, the recognitions that you’ve earned, and the love so destined for you<span>&#8212;</span>love beyond anything I could have offered you. There's things you want in life that I'm just not the one to give you. And though that saddens me to say, my sadness only lasts for a second, because I can rest assured with peace knowing that you will get to experience them. Even if I'm not by your side when they happen, knowing that <i>you will enjoy them regardless</i> is good enough for me.
-          <br/><br/>
-          I need you to know, not question, but know deep in your heart, that I care about you. I did at the time, I do now, and I will for as far as I can see. Because, for years I was just a <b>dead man walking</b>, but you pulled me out of long string of darker days. I'm gonna owe you for that, forever. So I don’t want to, and I couldn’t even imagine going back to my life before I met you. Let's just consider all those days lost.
-          <br/><br/>
-          So I don't ask this with any ulterior motives, but only to appreciate what you've given me. I can remember a moment when we were laying on the shoreline, fast asleep, with your head held against my chest. <br/>I had <i>no idea</i> the implications of that moment on the years to follow. We were so young, how would I know?<br/>How would I know that even though I'd get the incredible privilege of flying drones worth tens of thousands of dollars, your love was <i>by far</i> the most valuable thing I would ever touch. Or, how would I know that even though I could crown my resume with a job I'd worked years to attain, our times spent doing the most trivial things were the <i>closest I've come</i> to feeling complete.
-          <br/><br/>
-          So I ask this, rather, purely out of gratitude. I don’t mean to be too abstract here, consider for a second the towering improbability that I would exist in this world in the first place. Seriously. Multiply that by the sheer impossibility that 1) you and I would exist in the same time, 2) in the same place, and 3) we would cross paths. By all accounts, we should not have even met. <br />
-          And yet, <i>there was something greater.</i><br />
-          Something which could ignore odds and outcomes, something which could brush off statistics and probabilities, and manufacture circumstances so extreme, so severe, that you and I could collide in this immeasurable void of darkness.<br/>
-          So I'm grateful for that: whoever tipped the scales, whoever loaded the dice in our favor that day, they have my regards.
-          <br/><br/>
-          So I'll ask one last time: save space for me in your heart, and keep preserved a monument to the hours that we spent together on this earth. I ask you this, so that on hard days when you forget just how much joy you bring to the people around you, you can dig up my memory, and recall the moments when we were talking, laughing, doing whatever. And maybe in doing so, my memory can bring to mind warmer days filled with heavy sunshine,
-          <br /><i>just as the memory of you has done for me.</i>
-          <br/><br/>
-          And that's all I ask: for the opportunity to return the favor.
-          </p>
-          
-        </div>
-  
-        <div className={styles.essay} id='love-letter'>
-          <h2>Love letter to Virginia</h2>
-          <p>During my interview, my former boss warned me that it was a very physical job that I was applying for, and she asked: Would I be able to carry weight up and down terrain? My response was that when I turned 13 my parents simply stopped hiring movers. We kept moving every couple years, but my brother and I were now at an age to provide unpaid manual labor. Hey fair is fair, they kept me clothed & fed me 18 years. 
-          <br/><br/>
-          So I got the job. And for years after I used to wake up early, tie my boots tight in the darkness of my room, and hit the road before the sun came up. I traveled all throughout the state of Virginia conducting site visits for conservation easements. In layman's terms, I hiked around in the woods all day, taking pictures with an iPad and flying a drone. I saw the of the cattle ranches of the Piedmont, the swamps of eastern Richmond, and the 
-          <br/><br/>
-          Come class time I would be on the other side of the state. Make no mistake, the site visits weren’t just a walk in the park. I was earning every cent of the intern pay, climbing over livewire cattle fences, running away from dogs, and trekking briar thickets.
-          <br/><br/>
-          Now, normally, the place in which you live becomes smaller with time. You begin to get around without using a map, you become familiar with the best places to eat, you make friends with people who live across town. Places get smaller, strings get tighter. With Virginia, it was exactly the opposite. The more I traveled Virginia the larger it grew, an ever-unfolding piece of origami, intoxicating sea of deep green forests, constantly unfolding. 
-          <br/><br/>
-          It wasn’t just my farm or my backyard, it was my family’s land, my livelihood. 
-          <br/><br/>
-          One landowner I’ll never forget. It was was eastern Richmond, late march, and we had just turned the corner out of the winter slumber when everything around was starting to wake up. We had finished our work for the day, and as we’re packing our gear to head out, and I go up to the landowner shake her hand, and say “thank you for showing us around your property”. And she looks at me, and smiles with tears in her eyes, and I swear to god, she says “It’s my life’s work”. And so it grew. 
-          <br/><br/>
-          I had known, I mean really gotten to know, the land in which I inhabited.
-          </p>
-          
-        </div>
-
-    </section>
-    
-   <section>
-      <h2>Scraps</h2>
-      <Scraps />
-    </section> 
-
+       <section  className={styles.essays}>
+        <h2>Scraps</h2>
+        {/* <Scraps /> */}
+      </section> 
     </>
   )
 }

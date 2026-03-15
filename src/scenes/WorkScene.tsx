@@ -1,15 +1,58 @@
-import { OrbitControls, Environment, useGLTF, Center, Lightformer, MeshTransmissionMaterial, Stars } from "@react-three/drei"
-import { useFrame } from "@react-three/fiber"
+import { OrbitControls, Environment, useGLTF, Center, Lightformer, MeshTransmissionMaterial, Stars, Preload } from "@react-three/drei"
+import { useFrame, Canvas } from "@react-three/fiber"
 import { useState, useRef } from "react"
 import { Vector3 } from "three"
 import { easing } from "maath"
 
-// function CameraRig() {
+
+export default function PersonalScene() {
+  return (
+  <Canvas
+    style={{ width: "100vw", height: "100vh", position: "relative" }}
+    camera={{ position: [0, 1, 1], fov: 50 }}
+    gl={{ antialias: true, alpha: true }}
+  >
+    <Scene/>
+    <Preload all />
+  </Canvas>
+  )
+}
+
+{/* // function CameraRig() { */}
 //   useFrame((state, delta) => {
 //     easing.damp3(state.camera.position, [state.pointer.x * 0.5, state.pointer.y * 0.5, 5], 0.5, delta)
 //     state.camera.lookAt(0, 0, 0)
 //   })
 // }
+function Scene(){
+  return(
+    <>
+      <OrbitControls />
+      {/* <Environment preset="sunset" /> */}
+      <ambientLight intensity={10} />
+      <Center>
+        <Model scale={0.3}/>
+      </Center>
+      <mesh>
+        <icosahedronGeometry />
+        <MeshTransmissionMaterial
+          backside
+          samples={16}
+          resolution={256}
+          transmission={1}
+          roughness={0.1}
+          clearcoat={1}
+          thickness={0.8}
+          chromaticAberration={0.9}
+          anisotropy={1}
+          color={'#ffffff'}
+          attenuationColor={'#ffffff'}
+          />
+      </mesh>
+      {/* <Stars radius={10} count={300}  fade /> */}
+    </>
+  )
+}
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/newSceneExportCompressed.glb')
@@ -131,33 +174,3 @@ export function Model(props) {
 useGLTF.preload('/models/newSceneExportCompressed.glb')
 
 
-
-export default function PersonalScene() {
-  return (
-    <>
-      <OrbitControls />
-      {/* <Environment preset="sunset" /> */}
-      <ambientLight intensity={10} />
-      <Center>
-        <Model scale={0.3}/>
-      </Center>
-      <mesh>
-        <icosahedronGeometry />
-        <MeshTransmissionMaterial
-          backside
-          samples={16}
-          resolution={256}
-          transmission={1}
-          roughness={0.1}
-          clearcoat={1}
-          thickness={0.8}
-          chromaticAberration={0.9}
-          anisotropy={1}
-          color={'#ffffff'}
-          attenuationColor={'#ffffff'}
-          />
-      </mesh>
-      {/* <Stars radius={10} count={300}  fade /> */}
-    </>
-  )
-}
