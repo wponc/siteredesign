@@ -13,6 +13,12 @@ export default function Personal() {
     <section>
       <h1>haloes!</h1>
     </section>
+  
+    <section>
+      <h1>bio</h1>
+      <p>I got back into playing rugby this year, and I've had <i>just so much fun</i> with the game.<br />
+        Tackles and tries; bumps and bruises. Gotta love it. </p>
+    </section>
 
     <section>
       <h1>haleskarth!</h1>
@@ -20,13 +26,13 @@ export default function Personal() {
     
     <section>
       {/* <h1>bio</h1> */}
-      <p>Over the past few years I've been slowly picking up the basics of web design, and I'm particularly fascinated with the world of creativity made possible by WebGL. If I keep learning and making mediocre websites in my spare time, by sheer probability I'll eventually make a decent one. Here's to hoping...</p>
+      <p></p>
     </section>
 
 
 
     <section>
-      <p>This site was made with React-three-fiber, Vite, and Vercel. Much love to Bruno Simon for the Three.js Journey, Paul Henschel for the React-Three-Fiber ecosystem, and all the other contributors to the world of web design and graphics.</p>
+      <p>.</p>
     </section>
     </>
   )

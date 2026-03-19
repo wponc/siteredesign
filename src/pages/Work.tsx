@@ -16,7 +16,9 @@ export default function Work() {
     </section>
     <section id="creative">
       <h1>Creative</h1>
-      <p>Sites & renders.</p>
+
+      <p>Sites & renders.
+      Over the past few years I've been slowly picking up the basics of web design, and I'm particularly fascinated with the world of creativity made possible by WebGL. If I keep learning and making mediocre websites in my spare time, by sheer probability I'll eventually make a decent one. Here's to hoping...This site was made with React-three-fiber, Vite, and Vercel. Much love to Bruno Simon for the Three.js Journey, Paul Henschel for the React-Three-Fiber ecosystem, and all the other contributors to the world of web design and graphics</p>
     </section>
     </>
   )
