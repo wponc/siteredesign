@@ -1,7 +1,7 @@
 import { OrbitControls, Environment, Center, useGLTF, MeshTransmissionMaterial, Lightformer, Preload } from "@react-three/drei"
 import { useRef, useEffect } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useControls } from 'leva'
+  import { useControls } from 'leva'
 import { easing } from 'maath'
 
 export default function PersonalScene() {
