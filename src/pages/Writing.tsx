@@ -232,7 +232,9 @@ const entries = [
   {
     text: (
       <>
-        <p>I visited old friends in a city I once called home, and I couldn’t quite shake the feeling I didn’t belong. The people still had the same ring to their laughter, the streetlights still painted the hidden corners in their orange all the same, yet there was an unmistakable air of sadness behind it all. Things were reduced to mere reminiscences of a time long abandoned, and people nothing more than the broken fragments of a collective that started so tightly knit, but ended so hopelessly scattered.
+        <p>I visited old friends in a city I once called home, and I couldn’t quite shake the feeling I didn’t belong. The people still had the same ring to their laughter, the streetlights still painted the hidden corners in their orange all the same, yet there was an unmistakable air of sadness behind it all. Things were reduced to mere reminiscences of a time long abandoned, and people nothing more than the broken fragments of a collective that started so tightly knit, but ended so hopelessly scattered. <br /><br />
+        I guess Proust was right: that even if I traveled back to where I once stood, I would yield no sense of familiarity; the <i>places</i> in which we spend our days being just as fugitive as the days spent within them. <br /><br />
+        I don't know, something to that effect.  
         </p>
       </>
     ),

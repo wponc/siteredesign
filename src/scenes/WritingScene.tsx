@@ -1,16 +1,18 @@
-import { useRef, forwardRef, useEffect } from "react"
+import { useRef, forwardRef } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, Environment, MeshTransmissionMaterial, MeshReflectorMaterial, Preload } from "@react-three/drei"
+import { useGLTF, Environment, MeshTransmissionMaterial, Preload } from "@react-three/drei"
 import * as THREE from "three"
 import { easing } from "maath"
-import { EffectComposer, Bloom, DepthOfField, ToneMapping } from '@react-three/postprocessing'
 
 export default function WritingScene(){
   return(
   <Canvas
     style={{ width: "100vw", height: "100vh", position: "relative" }}
     camera={{ position: [0, 3, 1]}}
-    gl={{ antialias: true, alpha: true }}
+    dpr={[1, 1.5]}
+    gl={{ antialias: false, alpha: true }}
+    performance={{ min: 0.5, max: 1.5, debounce: 50 }}
+    // frameloop="always"
   >
     <Scene/>
     <Preload all />
@@ -40,13 +42,13 @@ const Pen = forwardRef<THREE.Object3D>((_, ref) => {
           >
             <MeshTransmissionMaterial
               backside
-              samples={16}
-              resolution={256}
+              samples={8}
+              resolution={128}
               transmission={1}
               roughness={0.1}
               clearcoat={1}
               thickness={0.8}
-              chromaticAberration={0.9}
+              chromaticAberration={0.7}
               anisotropy={1}
               color={'#ffffff'}
               attenuationColor={'#ffffff'}

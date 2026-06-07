@@ -1,9 +1,6 @@
-import { OrbitControls, Environment, Center, useGLTF, MeshTransmissionMaterial, Lightformer, useCursor, Preload, Line } from "@react-three/drei"
-import { useFrame, Canvas } from "@react-three/fiber"
-import React, { useState, useRef } from "react"
-import { Vector3 } from "three"
-import { easing } from "maath"
-import { useControls } from 'leva'
+import { Environment, useGLTF, MeshTransmissionMaterial, Preload } from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
+import { useRef } from "react"
 
 
 
@@ -12,7 +9,10 @@ export default function WorkScene() {
   <Canvas
     style={{ width: "100vw", height: "100vh", position: "relative" }}
     camera={{ position: [0, 2, 1], fov: 50 }}
-    gl={{ antialias: true, alpha: true }}
+    dpr={[1, 1.5]}
+    gl={{ antialias: false, alpha: true }}
+    performance={{ min: 0.5, max: 1.5, debounce: 50 }}
+    // frameloop="always"
   >
     <Scene />
     <Preload all />

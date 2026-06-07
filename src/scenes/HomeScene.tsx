@@ -1,7 +1,7 @@
-import { useRef, useMemo, useState, useEffect } from "react"
+import { useRef } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { MeshTransmissionMaterial, OrbitControls, Environment, Lightformer, Preload} from "@react-three/drei"
-import { Bloom, DepthOfField, EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
+import * as THREE from "three"
+import { MeshTransmissionMaterial, Environment, Lightformer, Preload } from "@react-three/drei"
 
 
 export default function HomeScene() {
@@ -9,7 +9,9 @@ export default function HomeScene() {
   <Canvas
     style={{ width: "100vw", height: "100vh", position: "relative" }}
     camera={{ position: [0, 1.8, 4], fov: 45 }}
-    dpr={[1, 2]}
+    dpr={[1, 1.5]}
+    gl={{ antialias: false, alpha: true }}
+    performance={{ min: 0.5, max: 1.5, debounce: 50 }}
   >
     <Scene />
     {/* <EffectComposer>
@@ -21,7 +23,7 @@ export default function HomeScene() {
 }
 
 function Scene(){
-  const meshRef = useRef(null)
+  const meshRef = useRef<THREE.Mesh>(null!)
 
   const randomRotation = useRef([
     Math.random() * Math.PI * 2, // Random X-axis rotation
@@ -49,13 +51,13 @@ function Scene(){
         <torusKnotGeometry args={[3, .3, 128, 16]} />
         <MeshTransmissionMaterial
           backside
-          samples={16}
-          resolution={256}
+          samples={8}
+          resolution={128}
           transmission={1}
           roughness={0.1}
           clearcoat={1}
           thickness={0.8}
-          chromaticAberration={0.9}
+          chromaticAberration={0.7}
           anisotropy={1}
           color={'#ffffff'}
           attenuationColor={'#ffffff'}

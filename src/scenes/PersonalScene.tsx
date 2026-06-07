@@ -1,7 +1,7 @@
-import { OrbitControls, Environment, Center, useGLTF, MeshTransmissionMaterial, Lightformer, Preload } from "@react-three/drei"
-import { useRef, useEffect } from "react"
+import { Environment, useGLTF, MeshTransmissionMaterial, Lightformer, Preload } from "@react-three/drei"
+import { useRef } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-  import { useControls } from 'leva'
+import { useControls } from 'leva'
 import { easing } from 'maath'
 
 export default function PersonalScene() {
@@ -9,7 +9,9 @@ export default function PersonalScene() {
   <Canvas
     style={{ width: "100vw", height: "100vh", position: "relative" }} 
     camera={{ position: [0, 1.8, 4], fov: 45 }}
-    dpr={[1, 2]}
+    dpr={[1, 1.5]}
+    gl={{ antialias: false, alpha: true }}
+    performance={{ min: 0.5, max: 1.5, debounce: 50 }}
   >
     <Scene />
     <Preload all />
@@ -93,12 +95,12 @@ function Model(props) {
            <MeshTransmissionMaterial
           backside
           samples={8}
-          resolution={256}
+          resolution={128}
           transmission={1}
-          roughness={0.1}
+          roughness={0.12}
           clearcoat={1}
           thickness={0.9}
-          chromaticAberration={0.4}
+          chromaticAberration={0.3}
           anisotropy={1}
           color={'#ffffff'}
           attenuationColor={'#ffffff'}
